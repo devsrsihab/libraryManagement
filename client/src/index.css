@@ -1,0 +1,24 @@
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body{
+  font-family: 'Poppins', sans-serif;
+}
+.active{
+    font-weight: bold;
+    color: #e59285;
+}
+.themeToggler:active{
+    background: transparent !important;
+    color: black !important;
+}
+.swiper-button-prev,.swiper-button-next {
+  color: #e59285 !important;
+  font-weight: bold !important;
+}
+span.swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background: #e59285;
+}

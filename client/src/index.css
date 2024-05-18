@@ -7,7 +7,10 @@ body{
 }
 .active{
     font-weight: bold;
-    color: #e59285;
+    color: rgb(0 166 152 / var(--tw-text-opacity));
+}
+::selection {
+  color: rgb(0 166 152 / var(--tw-text-opacity));
 }
 .themeToggler:active{
     background: transparent !important;

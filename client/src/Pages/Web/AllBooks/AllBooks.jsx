@@ -31,7 +31,6 @@ const AllBooks = () => {
           className="w-[50%] mx-auto text-white"
           title="all"
           highlightTitle="books"
-          details="all deferent book is here and also some new book in our library"
         />
         {/* books items */}
         <div className="books">

@@ -1,5 +1,4 @@
 import SectionHeading from "../../Shared/SectionHeading";
-import CategorieBg from "../../../../public/categorie.svg";
 import BookCard from "../../Shared/BookCard";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -14,16 +13,8 @@ const Categories = () => {
   }, []);
 
   return (
-    <div
-      style={{
-        background: `url(${CategorieBg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center ",
-        backgroundRepeat: "no-repeat",
-      }}
-      className="categories   py-12"
-    >
-      <div className="inner-section w-[80%] mx-auto">
+    <div className="categories   py-12">
+      <div className="bg-secondary/10 p-[5%] inner-section w-[100%] mx-auto">
         {/* section header */}
         <SectionHeading
           title="products"

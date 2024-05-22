@@ -16,7 +16,7 @@ const Categories = () => {
   return (
     <div className="categories bg-secondary/10   py-12">
       <Container>
-        <div className=" p-[5%] inner-section w-[100%] mx-auto">
+        <div className=" inner-section w-[100%] mx-auto">
           {/* section header */}
           <SectionHeading title="products" highlightTitle="category" />
 
@@ -24,7 +24,7 @@ const Categories = () => {
           <div
             // data-aos="fade-up"
             // data-aos-anchor-placement="bottom-bottom"
-            className="my-16 grid gap-6 grid-cols-1 sm:grid-cols-2  md:grid-cols-3  2xl:grid-cols-4 "
+            className=" grid gap-6 grid-cols-1 sm:grid-cols-2  md:grid-cols-3  2xl:grid-cols-4 "
           >
             {categories?.map((category) => (
               <BookCard

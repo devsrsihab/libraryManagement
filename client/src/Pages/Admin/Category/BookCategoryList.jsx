@@ -12,7 +12,7 @@ const BookCategoryList = () => {
   // use theme context
   const { theme } = useContext(ThemeContext);
   // single product state
-  const [showEdit, setShowEdit] = useState([]);
+  const [showEdit, setShowEdit] = useState({});
 
   // get all books
   const [categories, setCategories] = useState([]);
@@ -27,7 +27,7 @@ const BookCategoryList = () => {
 
   // 1.show all user
   useEffect(() => {
-    fetch("https://boighore.vercel.app/categories")
+    fetch("http://localhost:2000/categories")
       .then((res) => res.json())
       .then((data) => setCategories(data));
   }, [newCategory, updateCategory]);
@@ -35,7 +35,7 @@ const BookCategoryList = () => {
   // 2.single category show
   const handleSingleCategoryEdit = (id) => {
     axios
-      .get(`https://boighore.vercel.app/category/${id}`)
+      .get(`http://localhost:2000/category/${id}`)
       .then((res) => {
         setShowEdit(res.data);
       })
@@ -59,7 +59,7 @@ const BookCategoryList = () => {
       if (result.isConfirmed) {
         // 3.2 is confirm then deleted
         axios
-          .delete(`https://boighore.vercel.app/category/${id}`)
+          .delete(`http://localhost:2000/category/${id}`)
           .then((res) => {
             // 3.3 deleted successfully
             successNotify();
@@ -90,8 +90,11 @@ const BookCategoryList = () => {
           add Category
         </label>
       </div>
+
+      {/* Toaster for notifications */}
+      <Toaster />
+
       <table className="table">
-        <Toaster />
         {/* head */}
         <thead>
           <tr>
@@ -134,7 +137,7 @@ const BookCategoryList = () => {
 
       {/* add modal box */}
       <AddCategoryModal setNewCategory={setNewCategory} />
-      {/* edit modal bos */}
+      {/* edit modal box */}
       <EditCategoryModal
         setUpdateCategory={setUpdateCategory}
         showEdit={showEdit}

@@ -27,7 +27,7 @@ const AddBookModal = ({ setNewCategory }) => {
 
     // make a axios post reques
     axios
-      .post("https://boighore.vercel.app/category", formCollection)
+      .post("http://localhost:2000/category", formCollection)
       .then((res) => {
         form.reset();
         modalRef.current.checked = false; // Close the modal after successful submission

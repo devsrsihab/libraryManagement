@@ -34,7 +34,7 @@ const EditCategoryModal = ({ showEdit, setUpdateCategory }) => {
     // make a axios post reques
     axios
       .put(
-        `https://boighore.vercel.app/category/${showEdit._id}`,
+        `http://localhost:2000/category/${showEdit._id}`,
         formCollection
       )
       .then((res) => {
@@ -113,7 +113,7 @@ const EditCategoryModal = ({ showEdit, setUpdateCategory }) => {
   );
 };
 EditCategoryModal.propTypes = {
-  showEdit: PropTypes.array,
+  showEdit: PropTypes.object,
   setUpdateCategory: PropTypes.func,
 };
 export default EditCategoryModal;

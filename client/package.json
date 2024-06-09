@@ -13,7 +13,6 @@
     "aos": "^2.3.4",
     "axios": "^1.6.1",
     "firebase": "^10.5.2",
-    "keep-react": "^1.0.2",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "moment": "^2.29.4",

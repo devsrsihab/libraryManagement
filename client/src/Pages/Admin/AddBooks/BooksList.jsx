@@ -1,12 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-
 import AddBookModal from "./AddBookModal";
 import { ThemeContext } from "../../../Providers/ThemeChangeProvider";
 import BookRow from "./BookRow";
 import EditBookModal from "./EditBookModal";
-import axios from "axios";
 import Swal from "sweetalert2";
+import axiosReq from "../../../utils/axios";
 
 const BooksList = () => {
   // single product state
@@ -25,21 +24,22 @@ const BooksList = () => {
 
   // 1.show all user
   useEffect(() => {
-    fetch("http://localhost:2000/books")
-      .then((res) => res.json())
-      .then((data) => setBooks(data));
+    axiosReq
+      .get("/books")
+      .then((res) => {
+        setBooks(res.data);
+      })
+      .catch((error) => {
+        console.error("Error retrieving books:", error);
+      });
   }, [newNooks, updateBook]);
 
   // 2.single product show
   const handleSingleProductEdit = (id) => {
-    axios
-      .get(`http://localhost:2000/book/${id}`)
-      .then((res) => {
-        setShowEdit(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    axiosReq
+      .get(`/book/${id}`)
+      .then((res) => setShowEdit(res.data))
+      .catch((err) => console.log(err));
   };
 
   // 3. delete product
@@ -55,18 +55,14 @@ const BooksList = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        // 3.2 is confirm then deleted
-        axios
-          .delete(`http://localhost:2000/book/${id}`)
+        axiosReq
+          .delete(`/book/${id}`)
           .then((res) => {
-            // 3.3 deleted successfully
             successNotify();
 
             setnewNooks(res.data);
           })
-          .catch((err) => {
-            console.log(err);
-          });
+          .catch((err) => console.log(err));
       }
     });
   };

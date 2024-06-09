@@ -17,6 +17,8 @@ import PrivateRoute from "./PrivateRoute";
 import BookRead from "../Pages/Web/BorrowedBooks/bookRead";
 import AdminRoute from "./AdminRoute";
 
+const base_url = import.meta.env.VITE_BASE_URL;
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -34,7 +36,7 @@ const router = createBrowserRouter([
             <AllBooks />
           </PrivateRoute>
         ),
-        loader: () => fetch("http://localhost:2000/books"),
+        loader: () => fetch(`${base_url}/books`),
       },
       {
         path: "/book/:id",
@@ -43,8 +45,7 @@ const router = createBrowserRouter([
             <SingleBook />
           </PrivateRoute>
         ),
-        loader: ({ params }) =>
-          fetch(`http://localhost:2000/book/${params.id}`),
+        loader: ({ params }) => fetch(`${base_url}/book/${params.id}`),
       },
       {
         path: "/books/:category",
@@ -53,8 +54,7 @@ const router = createBrowserRouter([
             <SingleCategory />
           </PrivateRoute>
         ),
-        loader: ({ params }) =>
-          fetch(`http://localhost:2000/books/${params.category}`),
+        loader: ({ params }) => fetch(`${base_url}/books/${params.category}`),
       },
       {
         path: "/borrowdBooks",
@@ -71,8 +71,7 @@ const router = createBrowserRouter([
             <BookRead />
           </PrivateRoute>
         ),
-        loader: ({ params }) =>
-          fetch(`http://localhost:2000/book/${params.id}`),
+        loader: ({ params }) => fetch(`${base_url}/book/${params.id}`),
       },
       {
         path: "/login",
@@ -93,7 +92,7 @@ const router = createBrowserRouter([
         </AdminRoute>
       </PrivateRoute>
     ),
-    loader: () => fetch("http://localhost:2000/users"),
+    loader: () => fetch(`${base_url}/users`),
     // errorElement: <ErrorPage />,
     children: [
       {

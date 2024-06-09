@@ -3,7 +3,7 @@ import loginImg from "../../../public/loginImg.svg";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { ThemeContext } from "../../Providers/ThemeChangeProvider";
-import axios from "axios";
+import axiosReq from "../../utils/axios";
 
 const LoginForm = () => {
   // Authcontext use for login
@@ -43,15 +43,17 @@ const LoginForm = () => {
           setSuccess("Your Have login Succesfully");
         }
         // generate jwt toekn
-        axios
-          .post("https://boighore.vercel.app/jwtToken", userEmail, {
+        axiosReq
+          .post("/jwtToken", userEmail, {
             withCredentials: true,
           })
           .then((res) => {
             console.log(res.data);
             navigation(`${location?.state ? location.state : "/"}`);
           })
-          .catch((err) => console.log(err));
+          .catch((error) => {
+            console.error( error);
+          });
       })
 
       .catch((err) => {
@@ -73,14 +75,16 @@ const LoginForm = () => {
 
         // generate jwt toekn
         const userEmail = result.email;
-        axios
-          .post("https://boighore.vercel.app/jwtToken", userEmail, {
+        axiosReq
+          .post("/jwtToken", userEmail, {
             withCredentials: true,
           })
           .then((res) => {
-            console.log(res.data);
+            console.log(res);
           })
-          .catch((err) => console.log(err));
+          .catch((error) => {
+            console.error(error);
+          });
 
         navigation(`${location?.state ? location.state : "/"}`);
       })

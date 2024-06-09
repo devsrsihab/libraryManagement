@@ -1,7 +1,7 @@
 import PropTypes from "prop-types"; // ES6
-import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useEffect, useRef, useState } from "react";
+import axiosReq from "../../../utils/axios";
 
 const EditBookModal = ({ showEdit, setUpdateBook }) => {
   // modal open or not
@@ -10,8 +10,8 @@ const EditBookModal = ({ showEdit, setUpdateBook }) => {
 
   // Category List
   useEffect(() => {
-    axios
-      .get("http://localhost:2000/categories")
+    axiosReq
+      .get("/categories")
       .then((res) => setCategory(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -53,8 +53,8 @@ const EditBookModal = ({ showEdit, setUpdateBook }) => {
     handleModalClose(form.reset());
 
     // make an axios post request
-    axios
-      .put(`http://localhost:2000/book/${showEdit._id}`, formCollection)
+    axiosReq
+      .put(`/book/${showEdit._id}`, formCollection)
       .then((res) => {
         form.reset();
         console.log(res.data);

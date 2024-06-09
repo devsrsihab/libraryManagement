@@ -2,15 +2,21 @@ import SectionHeading from "../../Shared/SectionHeading";
 import BookCard from "../../Shared/BookCard";
 import { useEffect, useState } from "react";
 import Container from "../../Shared/Container";
+import axiosReq from "../../../utils/axios";
 
 const NewBooks = () => {
   // book new book data
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:2000/books")
-      .then((res) => res.json())
-      .then((data) => setBooks(data));
+    axiosReq
+      .get("/books")
+      .then((res) => {
+        setBooks(res.data); // Assuming the data is in res.data
+      })
+      .catch((error) => {
+        console.error("Error retrieving books:", error);
+      });
   }, []);
 
   return (

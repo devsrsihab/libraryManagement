@@ -5,8 +5,8 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import { AiFillEye } from "react-icons/ai";
 import { AiFillEyeInvisible } from "react-icons/ai";
 import { ThemeContext } from "../../Providers/ThemeChangeProvider";
-import axios from "axios";
 import { getAuth, updateProfile } from "firebase/auth";
+import axiosReq from "../../utils/axios";
 
 // import auth from "./firebase";
 
@@ -105,13 +105,13 @@ const Registration = () => {
         }
 
         // SAVE USER INFO IN DB
-        axios
-          .post("https://boighore.vercel.app/users", collectFormData)
-          .then((result) => {
-            console.log(result);
+        axiosReq
+          .post("/users", collectFormData)
+          .then((res) => {
+            console.log(res);
           })
-          .catch((err) => {
-            console.log(err);
+          .catch((error) => {
+            console.error(error);
           });
 
         SetSuccess("You have Registered Successfully");
@@ -149,13 +149,13 @@ const Registration = () => {
           role,
         };
 
-        axios
-          .post("https://boighore.vercel.app/users", collectFormData)
-          .then((result) => {
-            console.log(result);
+        axiosReq
+          .post("/users", collectFormData)
+          .then((res) => {
+            console.log(res);
           })
-          .catch((err) => {
-            console.log(err);
+          .catch((error) => {
+            console.error(error);
           });
 
         // The signed-in user info.

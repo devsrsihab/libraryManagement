@@ -3,7 +3,7 @@ import { useContext } from "react";
 import Swal from "sweetalert2";
 import { ThemeContext } from "../../../Providers/ThemeChangeProvider";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import axiosReq from "../../../utils/axios";
 
 const BorrowedBook = ({
   title = "",
@@ -28,8 +28,8 @@ const BorrowedBook = ({
       confirmButtonText: "Return it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios
-          .delete(`https://boighore.vercel.app/borrowed/${bookdId}/${_id}`)
+        axiosReq
+          .delete(`/borrowed/${bookdId}/${_id}`)
           .then((res) => {
             console.log(res.data);
 

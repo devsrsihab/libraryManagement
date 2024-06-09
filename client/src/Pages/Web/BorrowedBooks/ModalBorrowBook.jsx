@@ -2,9 +2,9 @@ import PropTypes from "prop-types"; // ES6
 
 import { useContext, useRef } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
-import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import moment from "moment";
+import axiosReq from "../../../utils/axios";
 
 const ModalBorrowBook = ({ book, setQty, qty }) => {
   // use auth context
@@ -14,7 +14,6 @@ const ModalBorrowBook = ({ book, setQty, qty }) => {
 
   // borrow book data
   const { _id, image, name, Category } = book;
-  console.log(_id);
 
   // notifications
   const successNotify = () =>
@@ -73,11 +72,8 @@ const ModalBorrowBook = ({ book, setQty, qty }) => {
       };
 
       // makeing  the reqesti
-      axios
-        .post(
-          `https://boighore.vercel.app/addToBorrow/${email}/${_id}`,
-          borrowdCollection
-        )
+      axiosReq
+        .post(`/addToBorrow/${email}/${_id}`, borrowdCollection)
         .then((resutl) => {
           console.log(resutl);
           modalRef.current.checked = false; // Close the modal after successful submission

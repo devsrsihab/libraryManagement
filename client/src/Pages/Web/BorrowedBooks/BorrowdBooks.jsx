@@ -2,9 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import brrowedBookBG from "../../../../public/brrowedBookBG.svg";
 import BorrowedBook from "./BorrowdBook";
 import { ThemeContext } from "../../../Providers/ThemeChangeProvider";
-import axios from "axios";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import noDataFound from "../../../../public/noDataFound.png";
+import axiosReq from "../../../utils/axios";
 const BorrowdBooks = () => {
   // use theme context
   const { theme } = useContext(ThemeContext);
@@ -19,10 +19,9 @@ const BorrowdBooks = () => {
   useEffect(() => {
     const getOrders = async () => {
       try {
-        const response = await axios.get(
-          `https://boighore.vercel.app/borrlowed?email=${user.email}`,
-          { withCredentials: true }
-        );
+        const response = await axiosReq.get(`/borrlowed?email=${user.email}`, {
+          withCredentials: true,
+        });
         setBorrowds(response.data);
         setLoading(false);
       } catch (error) {

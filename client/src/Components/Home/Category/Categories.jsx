@@ -1,10 +1,7 @@
 import SectionHeading from "../../Shared/SectionHeading";
-// import BookCard from "../../Shared/BookCard";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Container from "../../Shared/Container";
-import {VscArrowLeft , VscArrowRight } from "react-icons/vsc";
-
+import { VscArrowLeft, VscArrowRight } from "react-icons/vsc";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -16,15 +13,18 @@ import "swiper/css/pagination";
 // import required modules
 import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper/modules";
 import { IconContext } from "react-icons/lib";
+import axiosReq from "../../../utils/axios";
 
 const Categories = () => {
   // Category List
   const [categories, setCategory] = useState([]);
   useEffect(() => {
-    axios
-      .get("http://localhost:2000/categories")
+    axiosReq
+      .get("/categories")
       .then((res) => setCategory(res.data))
-      .catch((err) => console.log(err));
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
   return (
@@ -70,14 +70,14 @@ const Categories = () => {
             {/* Navigation arrows */}
             {/* // In your component */}
             <IconContext.Provider value={{ color: "black", size: "34px" }}>
-            <div className="slider_controll">
-              <div className="sr-button-prev ">
-                <VscArrowLeft className="curso-pointer" />
+              <div className="slider_controll">
+                <div className="sr-button-prev ">
+                  <VscArrowLeft className="curso-pointer" />
+                </div>
+                <div className="sr-button-next ">
+                  <VscArrowRight />
+                </div>
               </div>
-              <div className="sr-button-next ">
-                <VscArrowRight />
-              </div>
-            </div>
             </IconContext.Provider>
           </div>
         </div>

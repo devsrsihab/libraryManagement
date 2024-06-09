@@ -1,8 +1,8 @@
 import PropTypes from "prop-types"; // ES6
-import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import Rating from "react-rating";
 import toast, { Toaster } from "react-hot-toast";
+import axiosReq from "../../../utils/axios";
 
 const AddBookModal = ({ setnewNooks }) => {
   // state management
@@ -11,8 +11,8 @@ const AddBookModal = ({ setnewNooks }) => {
 
   // Category List
   useEffect(() => {
-    axios
-      .get("http://localhost:2000/categories")
+    axiosReq
+      .get("/categories")
       .then((res) => setCategory(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -49,8 +49,8 @@ const AddBookModal = ({ setnewNooks }) => {
     };
 
     // make a axios post request
-    axios
-      .post("http://localhost:2000", formCollection)
+    axiosReq
+      .post("/", formCollection)
       .then((res) => {
         form.reset();
         modalRef.current.checked = false; // Close the modal after successful submission
@@ -58,9 +58,7 @@ const AddBookModal = ({ setnewNooks }) => {
         setnewNooks(newBook);
         successNotify();
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => console.log(err));
   };
 
   return (

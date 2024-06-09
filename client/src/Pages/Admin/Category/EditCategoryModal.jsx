@@ -1,7 +1,7 @@
 import PropTypes from "prop-types"; // ES6
-import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useRef } from "react";
+import axiosReq from "../../../utils/axios";
 
 const EditCategoryModal = ({ showEdit, setUpdateCategory }) => {
   // modal openor not
@@ -32,11 +32,8 @@ const EditCategoryModal = ({ showEdit, setUpdateCategory }) => {
     handleModalClose(form.reset());
 
     // make a axios post reques
-    axios
-      .put(
-        `http://localhost:2000/category/${showEdit._id}`,
-        formCollection
-      )
+    axiosReq
+      .put(`/category/${showEdit._id}`, formCollection)
       .then((res) => {
         form.reset();
         console.log(res.data);

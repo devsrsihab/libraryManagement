@@ -1,7 +1,7 @@
 import PropTypes from "prop-types"; // ES6
-import axios from "axios";
 import { useRef } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import axiosReq from "../../../utils/axios";
 
 const AddBookModal = ({ setNewCategory }) => {
   // modal open or not
@@ -26,8 +26,8 @@ const AddBookModal = ({ setNewCategory }) => {
     };
 
     // make a axios post reques
-    axios
-      .post("http://localhost:2000/category", formCollection)
+    axiosReq
+      .post("/category", formCollection)
       .then((res) => {
         form.reset();
         modalRef.current.checked = false; // Close the modal after successful submission

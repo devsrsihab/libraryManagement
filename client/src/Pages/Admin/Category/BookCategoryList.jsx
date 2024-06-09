@@ -1,12 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-
 import AddCategoryModal from "./AddCategoryModal";
 import { ThemeContext } from "../../../Providers/ThemeChangeProvider";
 import CategoryRows from "./CategoryRows";
 import EditCategoryModal from "./EditCategoryModal";
-import axios from "axios";
 import Swal from "sweetalert2";
+import axiosReq from "../../../utils/axios";
 
 const BookCategoryList = () => {
   // use theme context
@@ -27,20 +26,25 @@ const BookCategoryList = () => {
 
   // 1.show all user
   useEffect(() => {
-    fetch("http://localhost:2000/categories")
-      .then((res) => res.json())
-      .then((data) => setCategories(data));
+    axiosReq
+      .get("/categories")
+      .then((res) => {
+        setCategories(res.data);
+      })
+      .catch((error) => {
+        console.error("Error retrieving books:", error);
+      });
   }, [newCategory, updateCategory]);
 
   // 2.single category show
   const handleSingleCategoryEdit = (id) => {
-    axios
-      .get(`http://localhost:2000/category/${id}`)
+    axiosReq
+      .get(`/category/${id}`)
       .then((res) => {
         setShowEdit(res.data);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        console.error("Error retrieving books:", error);
       });
   };
 
@@ -58,15 +62,15 @@ const BookCategoryList = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         // 3.2 is confirm then deleted
-        axios
-          .delete(`http://localhost:2000/category/${id}`)
+
+        axiosReq
+          .delete(`/category/${id}`)
           .then((res) => {
-            // 3.3 deleted successfully
             successNotify();
             setNewCategory(res.data);
           })
-          .catch((err) => {
-            console.log(err);
+          .catch((error) => {
+            console.error("Error retrieving books:", error);
           });
       }
     });

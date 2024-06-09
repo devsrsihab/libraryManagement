@@ -154,3 +154,8 @@ span.swiper-pagination-bullet {
   fill: red;
   /* background-color: red; */
 }
+
+
+.modal {
+  z-index: 9999999999 !important;
+}

@@ -10,14 +10,14 @@ import Swal from "sweetalert2";
 
 const BooksList = () => {
   // single product state
-  const [showEdit, setShowEdit] = useState([]);
+  const [showEdit, setShowEdit] = useState({});
   // get all books
   const [books, setBooks] = useState([]);
   const [newNooks, setnewNooks] = useState([]);
   const [updateBook, setUpdateBook] = useState([]);
   // use theme context
   const { theme } = useContext(ThemeContext);
-  // host toaster
+  // hot toaster
   const successNotify = () =>
     toast.success("Your Book Has Been Deleted!", {
       position: "top-right", // Set the position to top-right
@@ -25,7 +25,7 @@ const BooksList = () => {
 
   // 1.show all user
   useEffect(() => {
-    fetch("http://localhost:2000")
+    fetch("http://localhost:2000/books")
       .then((res) => res.json())
       .then((data) => setBooks(data));
   }, [newNooks, updateBook]);
@@ -33,7 +33,7 @@ const BooksList = () => {
   // 2.single product show
   const handleSingleProductEdit = (id) => {
     axios
-      .get(`https://boighore.vercel.app/book/${id}`)
+      .get(`http://localhost:2000/book/${id}`)
       .then((res) => {
         setShowEdit(res.data);
       })
@@ -57,7 +57,7 @@ const BooksList = () => {
       if (result.isConfirmed) {
         // 3.2 is confirm then deleted
         axios
-          .delete(`https://boighore.vercel.app/book/${id}`)
+          .delete(`http://localhost:2000/book/${id}`)
           .then((res) => {
             // 3.3 deleted successfully
             successNotify();
@@ -89,8 +89,8 @@ const BooksList = () => {
           add book
         </label>
       </div>
+      <Toaster /> {/* Moved Toaster outside of table */}
       <table className="table">
-        <Toaster />
         {/* head */}
         <thead>
           <tr>
@@ -134,7 +134,6 @@ const BooksList = () => {
           </tr>
         </tfoot>
       </table>
-
       {/* add modal box */}
       <AddBookModal setnewNooks={setnewNooks} />
       {/* edit modal bos */}

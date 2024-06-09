@@ -4,13 +4,14 @@ import toast, { Toaster } from "react-hot-toast";
 import { useEffect, useRef, useState } from "react";
 
 const EditBookModal = ({ showEdit, setUpdateBook }) => {
-  // modal openor not
+  // modal open or not
   const modalRef = useRef();
   const [categories, setCategory] = useState([]);
+
   // Category List
   useEffect(() => {
     axios
-      .get("https://boighore.vercel.app/categories")
+      .get("http://localhost:2000/categories")
       .then((res) => setCategory(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -51,9 +52,9 @@ const EditBookModal = ({ showEdit, setUpdateBook }) => {
     console.log(formCollection);
     handleModalClose(form.reset());
 
-    // make a axios post reques
+    // make an axios post request
     axios
-      .put(`https://boighore.vercel.app/book/${showEdit._id}`, formCollection)
+      .put(`http://localhost:2000/book/${showEdit._id}`, formCollection)
       .then((res) => {
         form.reset();
         console.log(res.data);
@@ -108,25 +109,19 @@ const EditBookModal = ({ showEdit, setUpdateBook }) => {
               />
             </div>
             <div className="form-control">
+              <label htmlFor="category" className="label">
+                <span className="label-text">Category</span>
+              </label>
               <select
                 name="category"
                 className="select w-full"
                 defaultValue={showEdit?.category || ""}
               >
-                <option disabled selected>
+                <option value="" disabled>
                   Choose Category
                 </option>
                 {categories.map((category) => (
-                  <option
-                    selected={
-                      showEdit &&
-                      showEdit.category &&
-                      showEdit.category.replace(/\s/g, "") ===
-                        category.categoryName.replace(/\s/g, "")
-                    }
-                    key={category._id}
-                    defaultValue={category.category}
-                  >
+                  <option key={category._id} value={category.categoryName}>
                     {category.categoryName}
                   </option>
                 ))}
@@ -210,8 +205,10 @@ const EditBookModal = ({ showEdit, setUpdateBook }) => {
     </>
   );
 };
+
 EditBookModal.propTypes = {
-  showEdit: PropTypes.array,
+  showEdit: PropTypes.object,
   setUpdateBook: PropTypes.func,
 };
+
 export default EditBookModal;

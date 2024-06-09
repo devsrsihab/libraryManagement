@@ -12,7 +12,7 @@ const AddBookModal = ({ setnewNooks }) => {
   // Category List
   useEffect(() => {
     axios
-      .get("https://boighore.vercel.app/categories")
+      .get("http://localhost:2000/categories")
       .then((res) => setCategory(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -48,7 +48,7 @@ const AddBookModal = ({ setnewNooks }) => {
       image,
     };
 
-    // make a axios post reques
+    // make a axios post request
     axios
       .post("http://localhost:2000", formCollection)
       .then((res) => {
@@ -98,15 +98,15 @@ const AddBookModal = ({ setnewNooks }) => {
               />
             </div>
             <div className="form-control">
-              <select name="category" className="select w-full">
-                <option disabled selected>
+              <label htmlFor="category" className="label">
+                <span className="label-text">Category</span>
+              </label>
+              <select name="category" className="select w-full" defaultValue="">
+                <option value="" disabled>
                   Choose Category
                 </option>
                 {categories.map((category) => (
-                  <option
-                    key={category._id}
-                    defaultValue={category.categoryName}
-                  >
+                  <option key={category._id} value={category.categoryName}>
                     {category.categoryName}
                   </option>
                 ))}

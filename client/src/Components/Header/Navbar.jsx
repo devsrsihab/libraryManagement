@@ -6,6 +6,7 @@ import { useContext, useEffect } from "react";
 import ThemeToggle from "./ThemeToggle";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { ThemeContext } from "../../Providers/ThemeChangeProvider";
+import DropDownMenu from "../Home/DropdownMenu";
 const Navbar = () => {
   useEffect(() => {
     AOS.init({
@@ -91,8 +92,7 @@ const Navbar = () => {
           </ul>
           <hr className="mt-4 w-full lg:hidden" />
 
-          {/* <div className="my-4 flex items-center space-x-6 space-y-2 lg:my-0 lg:ml-auto lg:space-x-8 lg:space-y-0"> */}
-          <ul className="mt-4 flex sm:mt-0">
+          {/* <ul className="mt-4 flex sm:mt-0">
             {loading || (
               <>
                 {user ? (
@@ -141,8 +141,17 @@ const Navbar = () => {
                 <ThemeToggle />
               </div>
             </li>
-          </ul>
-          {/* </div> */}
+          </ul> */}
+
+          <DropDownMenu>
+            <img
+              id="avatarButton"
+              type="button"
+              className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-[55px] lg:h-[55px] rounded-full object-cover"
+              src={user?.photoURL}
+              alt="User dropdown"
+            />
+          </DropDownMenu>
         </nav>
       </header>
     </>

@@ -1,8 +1,30 @@
 import { Menu, Transition } from "@headlessui/react";
 import { HiOutlineHome,HiLogout , HiChevronDown } from "react-icons/hi";
 import PropTypes from "prop-types";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 export default function DropDownMenu({children}) {
+  // use AuthContext
+  const { logOut } = useContext(AuthContext);
+  // navigate
+  const navigation = useNavigate();
+  // handle logout
+  const handleLogout = () => {
+    // logout
+    logOut()
+      .then(() => {
+        // Sign-out successful.
+        console.log("Sign-out successful.");
+        navigation("/");
+      })
+      .catch((error) => {
+        // An error happened.
+        console.log(error);
+      });
+  };
+
   return (
     <div className="w-52 text-right ">
       <Menu as="div" className="__demoMode">
@@ -20,16 +42,22 @@ export default function DropDownMenu({children}) {
         >
           <Menu.Items className="absolute right-0 w-52 mt-2 origin-top-right rounded-xl border border-white/10 bg-gray-900 text-white shadow-lg focus:outline-none">
             <Menu.Item>
-              <button className="group transition-all duration-300 hover:bg-red-300 bg-gray-900 flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
+              <Link
+                to={"/admin"}
+                className="group transition-all duration-300 hover:bg-red-300 bg-gray-900 flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10"
+              >
                 <HiOutlineHome className="w-4 h-4 fill-white" />
                 Dashboard
                 <kbd className="ml-auto  text-xs text-black hover:text-white/50 group-focus:inline">
                   ⌘E
                 </kbd>
-              </button>
+              </Link>
             </Menu.Item>
             <Menu.Item>
-              <button className="group hover:bg-red-300 transition-all duration-300 bg-gray-900 flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
+              <button
+                onClick={handleLogout}
+                className="group hover:bg-red-300 transition-all duration-300 bg-gray-900 flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10"
+              >
                 <HiLogout className="w-4 h-4 fill-white" />
                 Logout
                 <kbd className="ml-auto  text-xs text-black hover:text-white/50 group-focus:inline">

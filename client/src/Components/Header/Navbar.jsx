@@ -3,7 +3,6 @@ import NavLinks from "./NavLinks";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useContext, useEffect } from "react";
-import ThemeToggle from "./ThemeToggle";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { ThemeContext } from "../../Providers/ThemeChangeProvider";
 import DropDownMenu from "../Home/DropdownMenu";
@@ -15,9 +14,7 @@ const Navbar = () => {
   }, []);
 
   // use AuthContext
-  const { logOut, user, loading } = useContext(AuthContext);
-  // theme context
-  const { theme } = useContext(ThemeContext);
+  const { logOut, user } = useContext(AuthContext);
   // navigate
   const navigation = useNavigate();
   // handle logout
@@ -34,6 +31,8 @@ const Navbar = () => {
         console.log(error);
       });
   };
+  // theme context
+  const { theme } = useContext(ThemeContext);
 
   return (
     <>
@@ -92,66 +91,20 @@ const Navbar = () => {
           </ul>
           <hr className="mt-4 w-full lg:hidden" />
 
-          {/* <ul className="mt-4 flex sm:mt-0">
-            {loading || (
-              <>
-                {user ? (
-                  <li className="ml-6 flex h-8 w-8 cursor-pointer items-center justify-center rounded-xl border text-gray-600 hover:text-black hover:shadow">
-                    <details className="dropdown">
-                      <summary className="m-1 btn">
-                        <div className="bg-red w-10 h-10 rounded-full cursor-pointer">
-                          <img
-                            id="avatarButton"
-                            type="button"
-                            className="w-full rounded-full h-full object-cover"
-                            src={user?.photoURL}
-                            alt="User dropdown"
-                          />
-                        </div>
-                      </summary>
-
-                      <ul
-                        style={{ right: "-55%" }}
-                        className={`p-2  w-80 shadow absolute ${
-                          theme === "light"
-                            ? "bg-primary  text-white"
-                            : "bg-black text-white border"
-                        }  menu dropdown-content z-[1] rounded-box `}
-                      >
-                        <li>
-                          <a>{user?.displayName}</a>
-                        </li>
-                        <li>
-                          <a>{user?.email}</a>
-                        </li>
-                        <li onClick={handleLogout}>
-                          <a>log out</a>
-                        </li>
-                      </ul>
-                    </details>
-                  </li>
-                ) : (
-                  ""
-                )}
-              </>
-            )}
-
-            <li className="ml-8 flex  cursor-pointer items-center justify-center rounded-xl  text-gray-600 hover:text-black hover:shadow">
-              <div className="themeToggler p-0 w-16 flex items-center active:bg-red-500 mx-4 ">
-                <ThemeToggle />
-              </div>
-            </li>
-          </ul> */}
-
-          <DropDownMenu>
-            <img
-              id="avatarButton"
-              type="button"
-              className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-[55px] lg:h-[55px] rounded-full object-cover"
-              src={user?.photoURL}
-              alt="User dropdown"
-            />
-          </DropDownMenu>
+          {user ? (
+            <DropDownMenu>
+              <img
+                id="avatarButton"
+                type="button"
+                className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-[55px] lg:h-[55px] rounded-full object-cover"
+                src={user?.photoURL}
+                alt="User dropdown"
+              />
+            </DropDownMenu>
+          ) : (
+            ""
+          )}
+          
         </nav>
       </header>
     </>

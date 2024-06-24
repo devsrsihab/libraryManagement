@@ -159,6 +159,7 @@ const Registration = () => {
         const profileImage = result.user.photoURL;
         const email = result.user.email;
         const role = "customer";
+        const userEmail = { email };
         // collect the data
         const collectFormData = {
           name,
@@ -171,6 +172,19 @@ const Registration = () => {
           .post("/users", collectFormData)
           .then((res) => {
             console.log(res);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+
+        // generate jwt toekn
+        axiosReq
+          .post("/jwtToken", userEmail, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            console.log(res.data);
+            navigation(`${location?.state ? location.state : "/"}`);
           })
           .catch((error) => {
             console.error(error);

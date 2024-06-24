@@ -74,7 +74,8 @@ const LoginForm = () => {
         setIsloding(false);
 
         // generate jwt toekn
-        const userEmail = result.email;
+        const email = result?.user?.email;
+        const userEmail = {email};
         axiosReq
           .post("/jwtToken", userEmail, {
             withCredentials: true,

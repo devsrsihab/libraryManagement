@@ -286,13 +286,13 @@ const LoginForm = () => {
                 className={`inline-flex w-full items-center justify-center rounded-md
                 ${
                   theme === "light"
-                    ? "text-white hover:bg-primary/80 bg-primary"
+                    ? "text-white hover:bg-[#d34836]/80 bg-[#d34836]"
                     : " bg-[A6ADBA] border border-[#A6ADBA] text-[#A6ADBA] hover:bg-black "
                 } px-3.5 py-2.5 font-semibold leading-7 `}
               >
                 <span className="mr-2 inline-block">
                   <svg
-                    className="h-6 w-6 text-rose-500"
+                    className="h-6 w-6 text-white"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     fill="currentColor"

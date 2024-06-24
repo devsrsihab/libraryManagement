@@ -19,6 +19,7 @@ const BorrowdBooks = () => {
   useEffect(() => {
     const getOrders = async () => {
       try {
+        console.log("checking browed booke", user.email);
         const response = await axiosReq.get(`/borrlowed?email=${user.email}`, {
           withCredentials: true,
         });

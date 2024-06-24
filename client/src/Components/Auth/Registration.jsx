@@ -46,6 +46,7 @@ const Registration = () => {
     const password = form.password.value;
     const term = form.term.checked;
     const role = "customer";
+    const userEmail = { email };
 
     // form data
     const collectFormData = {
@@ -86,9 +87,13 @@ const Registration = () => {
         const user = result;
         const displayName = name;
         const photoURL = profileImage;
+
+        // if user exist
         if (user) {
           console.log("user exist");
           const auth = getAuth();
+
+          // update user profile
           updateProfile(auth.currentUser, {
             //And Replace the PhotoURL with the desired Image
             displayName: displayName,
@@ -109,6 +114,19 @@ const Registration = () => {
           .post("/users", collectFormData)
           .then((res) => {
             console.log(res);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+
+        // generate jwt toekn
+        axiosReq
+          .post("/jwtToken", userEmail, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            console.log(res.data);
+            navigation(`${location?.state ? location.state : "/"}`);
           })
           .catch((error) => {
             console.error(error);

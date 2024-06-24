@@ -4,11 +4,18 @@ import { useContext, useState } from "react";
 import { ThemeContext } from "../../Providers/ThemeChangeProvider";
 import { useLoaderData } from "react-router-dom";
 import Rating from "react-rating";
+import toast from "react-hot-toast";
 
 const SingleBook = () => {
   const { theme } = useContext(ThemeContext);
   const book = useLoaderData();
   const [qty, setQty] = useState(book.quantity);
+
+  // if the user already borrowed
+  const checkQty = () =>
+    toast.error("The book haven't enough quantity!", {
+      position: "bottom-right",
+    });
 
   return (
     <section className="py-12 sm:py-16">
@@ -229,12 +236,10 @@ const SingleBook = () => {
                   <BiBook className="text-2xl mr-3" />
                   Read
                 </button>
-                <button disabled type="button">
+                <button onClick={() => qty < 1 && checkQty()} type="button">
                   <label
                     htmlFor={qty > 0 ? "BorrowBookModal" : null}
-
                     className="inline-flex items-center justify-center rounded-md border-2 border-transparent bg-gray-600 bg-none px-12 py-3 text-center text-base font-bold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-gray-800 cursor-pointer"
-                    
                   >
                     <BiBookAdd className="text-2xl mr-3" />
                     Borrow

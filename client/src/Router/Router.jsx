@@ -84,19 +84,17 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "admin",
+    path: "dashboard",
     element: (
       <PrivateRoute>
-        <AdminRoute>
-          <AdminLayouts />
-        </AdminRoute>
+        <AdminLayouts />
       </PrivateRoute>
     ),
     loader: () => fetch(`${base_url}/users`),
     // errorElement: <ErrorPage />,
     children: [
       {
-        path: "dashboard",
+        path: "",
         element: (
           <PrivateRoute>
             <Dashboard />
@@ -107,25 +105,34 @@ const router = createBrowserRouter([
         path: "booksList",
         element: (
           <PrivateRoute>
-            <BooksList />
+            <AdminRoute>
+              <BooksList />
+            </AdminRoute>
           </PrivateRoute>
         ),
+        loader: () => fetch(`${base_url}/users`),
       },
       {
         path: "book/category",
         element: (
           <PrivateRoute>
-            <BookCategoryList />
+            <AdminRoute>
+              <BookCategoryList />
+            </AdminRoute>
           </PrivateRoute>
         ),
+        loader: () => fetch(`${base_url}/users`),
       },
       {
         path: "book/authors",
         element: (
           <PrivateRoute>
-            <AuthorList />
+            <AdminRoute>
+              <AuthorList />
+            </AdminRoute>
           </PrivateRoute>
         ),
+        loader: () => fetch(`${base_url}/users`),
       },
     ],
   },

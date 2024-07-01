@@ -27,8 +27,8 @@ if (adminEmail === userEmail) {
 //show error
 Swal.fire({
     icon: "error",
-    title: "Not Admin",
-    text: "Hey, You are not admin!",
+    title: "Forbidden",
+    text: "Something Went Wrong!",
   });
   
 // if not admin email equal user email

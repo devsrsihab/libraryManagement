@@ -35,6 +35,7 @@ const client = new MongoClient(uri, {
 const verifyToken = async (req, res, next) => {
   const token = req.cookies?.token;
 
+
   // if token if not found
   if (!token) {
     console.log("no token available");
@@ -48,13 +49,13 @@ const verifyToken = async (req, res, next) => {
 
     //2. if success
     req.user = decoded;
+    console.log("req.user", req.user);
     next();
   });
 };
 
 async function run() {
   try {
-
     // ==============================================
     //                    BOOK CRUD
     // ==============================================
@@ -128,7 +129,6 @@ async function run() {
       const result = await bookCollection.deleteOne(query);
       res.send(result);
     });
-
 
     // ==============================================
     //                    CATEGORY CRUD
@@ -262,6 +262,7 @@ async function run() {
     // 2. GET ALL BORROW INFO
     app.get("/borrlowed", verifyToken, async (req, res) => {
       // if token email is NOT correct with request query email
+      // console.log("req query email ===> ", req.query.email, req.user.email);
       if (req.query.email !== req.user.email) {
         return res.status(403).send({ message: "forbidden" });
       }
@@ -293,7 +294,7 @@ async function run() {
         { returnOriginal: false }
       );
 
-      // fi booked update
+      // if booked update
       if (!updatedBook) {
         res.status(500).send({ message: "internal server error" });
       }
@@ -338,7 +339,6 @@ async function run() {
     // jwt token generate and stored in cookie
     app.post("/jwtToken", async (req, res) => {
       const user = req.body;
-      console.log(user);
       const token = jwt.sign(user, process.env.ACCESS_SECRET_TOKEN, {
         expiresIn: "1h",
       });

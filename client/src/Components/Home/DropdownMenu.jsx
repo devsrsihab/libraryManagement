@@ -1,11 +1,11 @@
 import { Menu, Transition } from "@headlessui/react";
-import { HiOutlineHome,HiLogout , HiChevronDown } from "react-icons/hi";
+import { HiOutlineHome, HiLogout, HiChevronDown } from "react-icons/hi";
 import PropTypes from "prop-types";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 
-export default function DropDownMenu({children}) {
+export default function DropDownMenu({ children }) {
   // use AuthContext
   const { logOut } = useContext(AuthContext);
   // navigate
@@ -43,7 +43,7 @@ export default function DropDownMenu({children}) {
           <Menu.Items className="absolute right-0 w-52 mt-2 origin-top-right rounded-xl border border-white/10 bg-gray-900 text-white shadow-lg focus:outline-none">
             <Menu.Item>
               <Link
-                to={"/admin"}
+                to={"/dashboard"}
                 className="group transition-all duration-300 hover:bg-red-300 bg-gray-900 flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10"
               >
                 <HiOutlineHome className="w-4 h-4 fill-white" />

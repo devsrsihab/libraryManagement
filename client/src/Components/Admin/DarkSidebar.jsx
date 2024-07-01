@@ -1,4 +1,4 @@
-import { Fragment, useContext, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import {
   FaHome,
@@ -12,19 +12,34 @@ import { Link, NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import { AuthContext } from "../../Providers/AuthProvider";
 
-const navigation = [
-  { name: "Dashboard", href: "/admin/dashboard", icon: FaHome, current: false },
-  { name: "Books", href: "/admin/booksList", icon: FaBook, current: false },
+const adminNavigation = [
+  { name: "Dashboard", href: "/dashboard", icon: FaHome, current: false },
+  { name: "Books", href: "/dashboard/booksList", icon: FaBook, current: false },
   {
     name: "Categories",
-    href: "/admin/book/category",
+    href: "/dashboard/book/category",
     icon: FaUser,
     current: false,
   },
   {
     name: "Authors",
-    href: "/admin/book/authors",
+    href: "/dashboard/book/authors",
     icon: FaUsers,
+    current: false,
+  },
+];
+
+const customerNavigation = [
+  {
+    name: "Dashboard",
+    href: "/dashboard",
+    icon: FaHome,
+    current: false,
+  },
+  {
+    name: "Borrowed Book",
+    href: "/dashboard/borrowedBooks",
+    icon: FaBook,
     current: false,
   },
 ];
@@ -36,6 +51,29 @@ function classNames(...classes) {
 export default function DarkSidebar({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { user } = useContext(AuthContext);
+  const [userRole, setUserRole] = useState(null);
+  const base_url = import.meta.env.VITE_BASE_URL;
+
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch(`${base_url}/users`); // Replace with your API endpoint
+        const data = await response.json();
+
+        // Set the user role based on the current user's email
+        const currentUser = data.find((dbUser) => dbUser.email === user.email);
+        setUserRole(currentUser?.role);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, [user.email, base_url]);
+
+  const navigation =
+    userRole === "librarian" ? adminNavigation : customerNavigation;
 
   return (
     <>
@@ -132,7 +170,7 @@ export default function DarkSidebar({ children }) {
                     <a href="#" className="group block flex-shrink-0">
                       <div className="flex items-center">
                         <div>
-                          {/* avater imag */}
+                          {/* avatar image */}
                           <img
                             className="inline-block h-10 w-10 rounded-full"
                             src={user?.photoURL}
@@ -205,7 +243,7 @@ export default function DarkSidebar({ children }) {
               <a href="#" className="group block w-full flex-shrink-0">
                 <div className="flex items-center">
                   <div>
-                    {/* avater imag */}
+                    {/* avatar image */}
                     <img
                       className="inline-block h-9 w-9 rounded-full"
                       src={user?.photoURL}

@@ -1,11 +1,33 @@
-import BookCard from "../../Shared/BookCard";
+import PropTypes from "prop-types";
 
-const Category = () => {
+const Category = ({ category }) => {
   return (
     <>
-    <BookCard category="Art History" title="Art History" author="Sohan" rating="2" image="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGJsb2d8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60" buttonText="View Details" />
+      <div className="w-48 bg-white shadow-lg border border-gray-200 rounded-lg  ">
+          <div className="w-48 h-48 ">
+            <img
+              className="rounded-t-lg w-full h-full object-cover"
+              src={category.image}
+              alt=""
+            />
+          </div>
+        <div className="p-5">
+          <a href="#">
+            <p className="mb-2 text-[16px] tracking-tight text-primary">
+              {category.categoryName}
+            </p>
+          </a>
+        </div>
+      </div>
     </>
   );
+};
+
+Category.propTypes = {
+  category: PropTypes.shape({
+    image: PropTypes.string.isRequired,
+    categoryName: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Category;

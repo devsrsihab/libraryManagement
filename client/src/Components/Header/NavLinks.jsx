@@ -14,9 +14,6 @@ const NavLinks = () => {
       <li className="mr-12">
         <NavLink to={"/books"}>All Books</NavLink>
       </li>
-      <li className="mr-12">
-        <NavLink to={"/borrowdBooks"}>Borrowed Books</NavLink>
-      </li>
 
       {
         loading ||

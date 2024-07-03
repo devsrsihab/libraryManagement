@@ -11,11 +11,18 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "nodemon": "nodemon index.js",
+    "nodemon": "nodemon ./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+   "exports": {
+    ".": {
+      "import": "./src/index.js", 
+      "require": "./src/index.js"
+    }
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "type": "module"
 }

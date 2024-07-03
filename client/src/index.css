@@ -155,7 +155,35 @@ span.swiper-pagination-bullet {
   /* background-color: red; */
 }
 
-
 .modal {
   z-index: 9999999999 !important;
+}
+
+
+/* ============ */
+.booke_cate_section {
+  scrollbar-color: #cdcdcd transparent; /* default thumb and track color */
+  scrollbar-width: thin; /* or 'auto' or 'none' */
+}
+
+/* For webkit browsers (Chrome, Safari) */
+.booke_cate_section::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+  background: #444; /* Default scrollbar track color */
+}
+
+.booke_cate_section::-webkit-scrollbar-track {
+  background: #444; /* Default track color */
+}
+
+.booke_cate_section::-webkit-scrollbar-thumb {
+  background-color: #cdcdcd; /* Default thumb color */
+  border-radius: 10px;
+  border: 2px solid #444; /* Space around thumb */
+}
+
+.booke_cate_section:hover::-webkit-scrollbar-thumb {
+  background-color: #888; /* Thumb color on hover */
+  border: 2px solid #444; /* Border color on hover */
 }

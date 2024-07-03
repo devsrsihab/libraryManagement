@@ -102,6 +102,14 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "borrowdBooks",
+        element: (
+          <PrivateRoute>
+            <BorrowdBooks />
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "booksList",
         element: (
           <PrivateRoute>

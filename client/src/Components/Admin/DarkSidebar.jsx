@@ -38,7 +38,7 @@ const customerNavigation = [
   },
   {
     name: "Borrowed Book",
-    href: "/dashboard/borrowedBooks",
+    href: "/dashboard/borrowdBooks",
     icon: FaBook,
     current: false,
   },

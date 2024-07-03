@@ -11,7 +11,7 @@ export default {
         accent: "rgb(0, 128, 96)",
       },
       fontFamily: {
-        poppins: ["Poppins", "sans-serif"],
+        sans: ["Lato", "sans-serif"],
       },
     },
   },

@@ -1,13 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import brrowedBookBG from "../../../../public/brrowedBookBG.svg";
 import BorrowedBook from "./BorrowdBook";
-import { ThemeContext } from "../../../Providers/ThemeChangeProvider";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import noDataFound from "../../../../public/noDataFound.png";
 import axiosReq from "../../../utils/axios";
 const BorrowdBooks = () => {
   // use theme context
-  const { theme } = useContext(ThemeContext);
   // use auth context
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
@@ -35,28 +32,9 @@ const BorrowdBooks = () => {
 
   return (
     <div
-      style={{
-        background: `url(${theme === "light" ? brrowedBookBG : ""})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center ",
-        backgroundRepeat: "no-repeat",
-      }}
       className="books py-12"
     >
-      <div className="inner-section w-[80%] text-white mx-auto">
-        {/* section header */}
-        <div className="w-[50%] mx-auto text-center">
-          <h2
-            data-aos="fade-down"
-            className="text-3xl  my-8  font-bold uppercase"
-          >
-            {" "}
-            All Borrowed Books
-          </h2>
-          <p data-aos="fade-up">
-            you can see all borrowd books here and can return
-          </p>
-        </div>
+      <div className="inner-section text-white mx-auto">
         {/* books items */}
         <div
           // data-aos="fade-up"

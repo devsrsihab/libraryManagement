@@ -50,7 +50,7 @@ const Navbar = () => {
           <span className="mr-2 w-12-">
             <img
               className="w-full h-full object-cover"
-              src="https://i.ibb.co/qpGgxkp/bookstor-compact-MConverter-eu.png"
+              src="https://i.ibb.co/rf8gFZK/logo-2.png"
               alt=""
             />
           </span>
@@ -104,7 +104,6 @@ const Navbar = () => {
           ) : (
             ""
           )}
-          
         </nav>
       </header>
     </>
